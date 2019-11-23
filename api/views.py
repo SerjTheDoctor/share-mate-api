@@ -4,7 +4,7 @@ from .models import Movie
 
 main = Blueprint('main', __name__)
 
-@main.route('/add_movie', methods=['POST'])
+@main.route('/login', methods=['POST'])
 def add_movie():
     movie_data = request.get_json()
 
@@ -15,12 +15,13 @@ def add_movie():
 
     return 'Done', 201
 
-@main.route('/movies')
+
+@main.route('/movies', methods=['GET'])
 def movies():
     movie_list = Movie.query.all()
     movies = []
 
     for movie in movie_list:
-        movies.append({'title' : movie.title, 'rating' : movie.rating})
+        movies.append({'Title' : movie.title, 'Rating' : movie.rating})
 
     return jsonify({'movies' : movies})
