@@ -7,12 +7,11 @@ class Movie(db.Model):
 
 
 class Users(db.Model):
-    id=db.Column(db.Integer,primary_key=True)
     last_name=db.Column(db.String(45))
     first_name=db.Column(db.String(45))
     shareCoins=db.Column(db.Integer)
     password=db.Column(db.String(25))
-    mail=db.Column(db.String(40))
+    mail=db.Column(db.String(40),primary_key=True)
     location=db.Column(db.String(50))
     age=db.Column(db.Integer)
     image=db.Column(db.String(255))
