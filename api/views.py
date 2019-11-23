@@ -4,19 +4,7 @@ from .models import Users,Movie
 
 main = Blueprint('main', __name__)
 
-@main.route('/register', methods=['POST'])
-def add_movie():
-    user_data = request.get_json()
-
-    new_movie = Movie(id=user_data['id'],title=user_data['title'], rating=user_data['rating'])
-
-    db.session.add(new_movie)
-    db.session.commit()
-
-    return 'Done', 201
-
-
-@main.route('/users', methods=['GET'])
+@main.route('/login', methods=['GET'])
 def movies():
     users_list = Users.query.all()
     users = []
