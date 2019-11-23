@@ -21,6 +21,11 @@ class UserTag(db.Model):
     tag=db.Column(db.String(20))
     rating=db.Column(db.Integer)
 
+class ExternalLinks(db.Model):
+    mail=db.Column(db.String(40),primary_key=True)
+    linkedin=db.Column(db.String(120))
+
+
 
 
 

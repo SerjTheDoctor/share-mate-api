@@ -25,7 +25,14 @@ def check_login():
             return 0;
     return 1;
 
-
+@main.route('/givetags',methods=['GET'])
+def giveTags():
+    tag=['math','machine learning','football','italian dishes','tango','web development','react','css','carpenting','english']
+    users_with_tag_list = UserTag.query.all()
+    #for tagger in users_with_tag_list:
+      #if tagger.tag not in tag:
+       #     tag.append(tagger.tag)
+    return jsonify(tag)
 
 @main.route('/filter', methods=['GET'])
 def filter():
