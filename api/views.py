@@ -1,14 +1,14 @@
 from flask import Blueprint, jsonify, request
 from . import db
-from .models import Movie
+from .models import Users,Movie
 
 main = Blueprint('main', __name__)
 
-@main.route('/login', methods=['POST'])
+@main.route('/register', methods=['POST'])
 def add_movie():
-    movie_data = request.get_json()
+    user_data = request.get_json()
 
-    new_movie = Movie(title=movie_data['title'], rating=movie_data['rating'])
+    new_movie = Movie(id=user_data['id'],title=user_data['title'], rating=user_data['rating'])
 
     db.session.add(new_movie)
     db.session.commit()
@@ -16,12 +16,24 @@ def add_movie():
     return 'Done', 201
 
 
-@main.route('/movies', methods=['GET'])
+@main.route('/users', methods=['GET'])
 def movies():
-    movie_list = Movie.query.all()
-    movies = []
+    users_list = Users.query.all()
+    users = []
 
-    for movie in movie_list:
-        movies.append({'Title' : movie.title, 'Rating' : movie.rating})
+    for user in users_list:
+        users.append({'mail' : user.mail, 'password' : user.password})
 
-    return jsonify({'movies' : movies})
+    return jsonify({'users' : users})
+
+@main.route('/register', methods=['POST'])
+def add_user():
+    user_data = request.get_json()
+
+    new_user = Users(id=user_data['id'],last_name=user_data['last_name'],first_name=user_data['first_name'],shareCoins=user_data['shareCoins'],password=user_data['password'],
+                     mail=user_data['mail'],location=user_data['location'],age=user_data['age'],image=user_data['image'])
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return "Added"+user_data['last_name']+"\n", 201
