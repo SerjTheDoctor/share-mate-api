@@ -80,9 +80,13 @@ def add_tags():
 def profile():
     users_list = Users.query.all()
     users = []
-
+    users_with_tag_list = UserTag.query.all()
     for user in users_list:
-        users.append({'last_name' : user.last_name, 'first_name' : user.first_name ,'shareCoins' : user.shareCoins , 'password' : user.password,'mail' : user.mail, 'location' : user.location, 'age':user.age ,'image': user.image })
+        tags=[]
+        for tag in users_with_tag_list:
+            if tag.mail == user.mail:
+                tags.append(tag.tag)
+        users.append({'last_name' : user.last_name, 'first_name' : user.first_name ,'shareCoins' : user.shareCoins , 'password' : user.password,'tags':tags,'mail' : user.mail, 'location' : user.location, 'age':user.age ,'image': user.image })
 
     return jsonify(users)
 
