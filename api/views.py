@@ -67,12 +67,13 @@ def add_tags():
 
     data = request.get_json()
     mail=data['mail']
-    tags=data['tags']
+    tags=data['tag']
+    rating=data['rating']
+    new_tag = UserTag(mail=mail,tag=tags,rating=rating)
+    db.session.add(new_tag)
+    db.session.commit()
 
-    for tag in tags:
-        new_tag = UserTag(mail,tag)
-        db.session.add(new_tag)
-        db.session.commit()
+    return "Added tag"
 
 
 
@@ -84,12 +85,23 @@ def profile():
     for user in users_list:
         tags=[]
         for tag in users_with_tag_list:
-            if tag.mail == user.mail:
-                tags.append(tag.tag)
+            #if tag.mail == user.mail:
+                tags.append({tag.tag:tag.rating})
         users.append({'last_name' : user.last_name, 'first_name' : user.first_name ,'shareCoins' : user.shareCoins , 'password' : user.password,'tags':tags,'mail' : user.mail, 'location' : user.location, 'age':user.age ,'image': user.image })
 
     return jsonify(users)
 
+@main.route('/tagsman',methods=['GET'])
+def tags():
+    users_list = UserTag.query.all()
+    users = []
+    tags=[]
+    for tag in users_list:
+            #if tag.mail == user.mail:
+        tags.append({tag.tag:tag.rating})
+    users.append({'tags' : tags })
+
+    return jsonify(users)
 
 @main.route('/register', methods=['POST'])
 def add_user():
