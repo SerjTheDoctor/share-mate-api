@@ -13,8 +13,8 @@ def check_login():
     password = data['password']
     for user in users_list:
         if user.mail == mail and user.password == password:
-            return {"ok","true"}
-    return {"ok","false"}
+            return {"ok":"true"}
+    return {"ok":"false"}
 
 @main.route('/givetags',methods=['GET'])
 def giveTags():
@@ -29,19 +29,20 @@ def giveTags():
 def addLinks():
     links_data = request.get_json()
     links_list = ExternalLinks.query.all()
+    print("links {}".format(links_list))
     ok=0
     for user in links_list:
-        if user.mail==links_data['mail']:
+        if user.mail == links_data['mail']:
             user.linkedin=links_data['linkedin']
             user.github=links_data['github']
-            ok=1
-            break
-    if ok==0:
-        new_user = ExternalLinks(mail=links_data['mail'],linkedin=links_data['linkedin'],github=links_data['github'])
-        db.session.add(new_user)
+            db.session.commit()
+            return {"ok":"modified"}
+
+    new_user = ExternalLinks(mail=links_data['mail'],linkedin=links_data['linkedin'],github=links_data['github'])
+    db.session.add(new_user)
     db.session.commit()
     links_list = ExternalLinks.query.all()
-    return jsonify(links_data)
+    return {"ok":"added"}
 
 @main.route('/filter', methods=['GET'])
 def filter():
