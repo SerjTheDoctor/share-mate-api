@@ -18,7 +18,7 @@ class Users(db.Model):
 
 class UserTag(db.Model):
     mail=db.Column(db.String(40),primary_key=True)
-    tag=db.Column(db.String(20))
+    tag=db.Column(db.String(20),primary_key=True)
     rating=db.Column(db.Integer)
 
 class ExternalLinks(db.Model):

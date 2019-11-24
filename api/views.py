@@ -82,6 +82,7 @@ def profile():
     users_list = Users.query.all()
     users = []
     users_with_tag_list = UserTag.query.all()
+    print(users_with_tag_list)
     for user in users_list:
         tags=[]
         for tag in users_with_tag_list:
