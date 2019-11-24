@@ -44,7 +44,7 @@ def addLinks():
     links_list = ExternalLinks.query.all()
     return {"ok":"added"}
 
-@main.route('/filter', methods=['GET'])
+@main.route('/filter', methods=['POST'])
 def filter():
     data = request.get_json()
     tagger = data['tag']
