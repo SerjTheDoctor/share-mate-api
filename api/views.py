@@ -48,19 +48,25 @@ def addLinks():
 def filter():
     data = request.get_json()
     tagger = data['tag']
-    users_with_tag_list = UserTag.query.filter_by(tag=tagger)
+    users_with_tag_list = UserTag.query.filter(UserTag.tag.contains(tagger))
+
+
     users_list = Users.query.all()
     users = []
-    users_with_tag =[]
+    print(users_with_tag_list)
+    for user in users_list:
+        tags = []
+        ok=0
+        for tag in users_with_tag_list:
+            if tag.mail == user.mail:
+                ok=1
+                tags.append({"name": tag.tag, "rating": tag.rating})
+        if ok==1:
+            users.append({'last_name': user.last_name, 'first_name': user.first_name, 'shareCoins': user.shareCoins,
+                  'password': user.password, 'tags': tags, 'mail': user.mail, 'location': user.location,
+                  'age': user.age, 'image': user.image})
 
-    for user in users_with_tag_list:
-        users.append(user.mail)
-
-    for user_with_tag in users_list:
-        if user_with_tag.mail in users:
-            users_with_tag.append(user_with_tag)
-
-    return jsonify(users_with_tag)
+    return jsonify(users)
 
 @main.route('/addTag', methods=['POST'])
 def add_tags():
