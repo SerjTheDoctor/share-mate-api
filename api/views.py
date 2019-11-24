@@ -85,8 +85,8 @@ def profile():
     for user in users_list:
         tags=[]
         for tag in users_with_tag_list:
-            #if tag.mail == user.mail:
-                tags.append({tag.tag:tag.rating})
+            if tag.mail == user.mail:
+                tags.append({"name":tag.tag,"rating":tag.rating})
         users.append({'last_name' : user.last_name, 'first_name' : user.first_name ,'shareCoins' : user.shareCoins , 'password' : user.password,'tags':tags,'mail' : user.mail, 'location' : user.location, 'age':user.age ,'image': user.image })
 
     return jsonify(users)

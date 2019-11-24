@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="587b1419-ffbe-4c6e-9ad8-f7209d5cca16" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="587b1419-ffbe-4c6e-9ad8-f7209d5cca16" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,8 +109,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/api/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="296">
-                  <caret line="75" column="19" lean-forward="true" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+                <state relative-caret-position="109">
+                  <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
                   <folding>
                     <element signature="e#0#45#0" expanded="true" />
                   </folding>
@@ -287,12 +285,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574522231992</updated>
-      <workItem from="1574522233312" duration="29341000" />
+      <workItem from="1574522233312" duration="29606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29341000" />
+    <option name="totallyTimeSpent" value="29606000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -395,8 +393,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="75" column="19" lean-forward="true" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+        <state relative-caret-position="109">
+          <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
