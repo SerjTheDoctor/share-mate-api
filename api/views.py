@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from . import db
-from .models import Users,UserTag,ExternalLinks
+from .models import Users,UserTag,ExternalLinks,Message
+
 
 main = Blueprint('main', __name__)
 
@@ -81,8 +82,25 @@ def add_tags():
 
     return "Added tag"
 
+@main.route('/getmessage', methods=['GET'])
+def get_messages():
+    Message_list = Message.query.all()
+    print(Message_list)
+    Messages = []
+    for message in Message_list:
+        Messages.append({'id':message.id,'mail1':message.mail_user1,'mail2':message.mail_user2,'who':message.sender,'text':message.message})
+    return jsonify(Messages)
 
+@main.route('/addmessage', methods=['POST'])
+def addmessage():
+    message_data = request.get_json()
 
+    new_message = Message(id=message_data["id"],mail_user1=message_data["mail1"],mail_user2=message_data["mail2"],sender=message_data["who"],message=message_data["message"])
+
+    db.session.add(new_message)
+    db.session.commit()
+
+    return "ADDED"
 @main.route('/users', methods=['GET'])
 def profile():
     users_list = Users.query.all()

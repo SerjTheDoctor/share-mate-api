@@ -1,9 +1,5 @@
 from . import db
 
-class Movie(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50))
-    rating = db.Column(db.Integer)
 
 
 class Users(db.Model):
@@ -25,6 +21,13 @@ class ExternalLinks(db.Model):
     mail=db.Column(db.String(40),primary_key=True)
     linkedin=db.Column(db.String(120))
     github=db.Column(db.String(120))
+
+class Message(db.Model):
+    id=db.Column(db.Integer, primary_key=True)
+    mail_user1=db.Column(db.String(40))
+    mail_user2=db.Column(db.String(40))
+    sender=db.Column(db.Integer)
+    message=db.Column(db.String(300))
 
 
 
