@@ -64,8 +64,8 @@ def filter():
                 ok=1
                 tags.append({"name":tag.tag,"rating":tag.rating})
         if ok==1:
-            users.append({'last_name': user.last_name, 'first_name': user.first_name, 'shareCoins': user.shareCoins, 'location': user.location,
-                  'age': user.age, 'image': user.image,'tags':tags})
+            users.append({'last_name': user.last_name, 'first_name': user.first_name, 'location': user.location,
+                  'age': user.age, 'image': user.image,'tags':tags,'mail':user.mail})
 
     return jsonify(users)
 
@@ -81,18 +81,34 @@ def add_tags():
     db.session.commit()
 
     return "Added tag"
+@main.route('/getUser',methods=['POST'])
+def GetUser():
+    data = request.get_json();
+    mail = data['mail']
+    user = Users.query.filter(UserTag.tag.contains(mail))
+    user_tag = UserTag.query.all()
 
-@main.route('/getmessage', methods=['GET'])
+    tags = []
+    for tag in user_tag:
+        if tag.mail == user.mail:
+            tags.append({"name": tag.tag, "rating": tag.rating})
+    return {'last_name': user.last_name, 'first_name': user.first_name,'phone':user.phone_number,
+            'location': user.location, 'age': user.age, 'image': user.image, 'tags': tags, 'mail': user.mail};
+
+
+@main.route('/getMessage', methods=['POST'])
 def get_messages():
-    Message_list = Message.query.all()
-    print(Message_list)
+    message_data = request.get_json()
+    sender=message_data["sender"]
+    receiver=message_data["receiver"]
+    message_list = Message.query.filter((Message.mail_user1 == sender and Message.mail_user2 == receiver) or (Message.mail_user1 == receiver and Message.mail_user2 == sender))
     Messages = []
-    for message in Message_list:
+    for message in message_list:
         Messages.append({'id':message.id,'mail1':message.mail_user1,'mail2':message.mail_user2,'who':message.sender,'text':message.message})
     return jsonify(Messages)
 
-@main.route('/addmessage', methods=['POST'])
-def addmessage():
+@main.route('/addMessage', methods=['POST'])
+def add_message():
     message_data = request.get_json()
 
     new_message = Message(id=message_data["id"],mail_user1=message_data["mail1"],mail_user2=message_data["mail2"],sender=message_data["who"],message=message_data["message"])
