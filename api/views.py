@@ -14,8 +14,8 @@ def check_login():
     password = data['password']
     for user in users_list:
         if user.mail == mail and user.password == password:
-            return {"ok":"true"}
-    return {"ok":"false"}
+            return {"ok" :"true"}
+    return {"ok" :"false"}
 
 @main.route('/givetags',methods=['GET'])
 def giveTags():
@@ -101,7 +101,7 @@ def get_messages():
     message_data = request.get_json()
     sender=message_data["sender"]
     receiver=message_data["receiver"]
-    message_list = Message.query.filter((Message.mail_user1 == sender and Message.mail_user2 == receiver) or (Message.mail_user1 == receiver and Message.mail_user2 == sender))
+    message_list = Message.query.filter((Message.mail_user1.contains(sender) & Message.mail_user2.contains(receiver)) | (Message.mail_user1.contains(receiver) & Message.mail_user2.contains(sender)))
     Messages = []
     for message in message_list:
         Messages.append({'id':message.id,'mail1':message.mail_user1,'mail2':message.mail_user2,'who':message.sender,'text':message.message})
