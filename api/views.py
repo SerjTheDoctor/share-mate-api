@@ -50,6 +50,7 @@ def filter():
     data = request.get_json()
     tagger = data['tag']
     users_with_tag_list = UserTag.query.filter(UserTag.tag.contains(tagger))
+    user_tag=UserTag.query.all()
 
 
     users_list = Users.query.all()
@@ -58,14 +59,13 @@ def filter():
     for user in users_list:
         tags = []
         ok=0
-        for tag in users_with_tag_list:
+        for tag in user_tag:
             if tag.mail == user.mail:
                 ok=1
-                tags.append({"name": tag.tag, "rating": tag.rating})
+                tags.append({"name":tag.tag,"rating":tag.rating})
         if ok==1:
-            users.append({'last_name': user.last_name, 'first_name': user.first_name, 'shareCoins': user.shareCoins,
-                  'password': user.password, 'tags': tags, 'mail': user.mail, 'location': user.location,
-                  'age': user.age, 'image': user.image})
+            users.append({'last_name': user.last_name, 'first_name': user.first_name, 'shareCoins': user.shareCoins, 'location': user.location,
+                  'age': user.age, 'image': user.image,'tags':tags})
 
     return jsonify(users)
 
@@ -116,7 +116,7 @@ def profile():
 
     return jsonify(users)
 
-@main.route('/tagsman',methods=['GET'])
+@main.route('/tagsman',methods=['POST'])
 def tags():
     users_list = UserTag.query.all()
     users = []
@@ -132,10 +132,10 @@ def tags():
 def add_user():
     user_data = request.get_json()
 
-    new_user = Users(last_name=user_data['last_name'],first_name=user_data['first_name'],shareCoins=user_data['shareCoins'],password=user_data['password'],
-                     mail=user_data['mail'],location=user_data['location'],age=user_data['age'],image=user_data['image'])
+    new_user = Users(last_name=user_data['last_name'],first_name=user_data['first_name'],shareCoins=0,password=user_data['password'],
+                     mail=user_data['mail'],phone_number=user_data['phone'],location=user_data['location'],age=user_data['age'],image=user_data['image'])
 
     db.session.add(new_user)
     db.session.commit()
 
-    return "Added"+user_data['last_name']+"\n", 201
+    return "Added"+user_data['last_name']+"\n";
