@@ -14,7 +14,7 @@ class Users(db.Model):
     image=db.Column(db.String(255))
 
 class UserTag(db.Model):
-    mail=db.Column(db.String(40),primary_key=True)
+    mail=db.Column(db.String(40), primary_key=True)
     tag=db.Column(db.String(20),primary_key=True)
     rating=db.Column(db.Integer)
 
