@@ -5,7 +5,6 @@ from .models import Users,UserTag,ExternalLinks,Message
 
 main = Blueprint('main', __name__)
 
-
 @main.route('/login', methods=['POST'])
 def check_login():
     users_list = Users.query.all()
