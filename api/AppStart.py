@@ -10,8 +10,11 @@ bcrypt = Bcrypt(app)
 
 
 
-main = Blueprint('main', __name__)
-app.register_blueprint(main)
+
+@app.route('/home', methods=['GET'])
+def index():
+    return "Hello home!"
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', threaded=True, debug=True)
+

@@ -1,20 +1,21 @@
 from flask import Blueprint, jsonify, request , render_template
 from . import db
 from .models import Users,UserTag,ExternalLinks,Message
-from AppStart import app
+from .AppStart import app
 
 
 
 
 main = Blueprint('main', __name__)
+app.register_blueprint(main)
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/<path:path>', methods=['GET'])
-def any_root_path(path):
-    return render_template('index.html')
+@app.route('/page<path:page>', methods=['GET'])
+def any_root_path(page):
+    return render_template('page.html')
 
 @app.route('/login', methods=['POST'])
 def check_login():
