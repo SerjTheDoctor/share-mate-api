@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/share-mate-react" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/static" vcs="Git" />
   </component>
 </project>

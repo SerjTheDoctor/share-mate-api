@@ -1,23 +1,18 @@
 from flask import Blueprint, jsonify, request , render_template
-from . import db
-from .models import Users,UserTag,ExternalLinks,Message
-from .AppStart import app
+from api import db
+from api.Data.models import Users,UserTag,ExternalLinks,Message
 
+view = Blueprint('view', __name__)
 
-
-
-main = Blueprint('main', __name__)
-app.register_blueprint(main)
-
-@app.route('/', methods=['GET'])
+@view.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/page<path:page>', methods=['GET'])
+@view.route('/page<path:page>', methods=['GET'])
 def any_root_path(page):
     return render_template('page.html')
 
-@app.route('/login', methods=['POST'])
+@view.route('/login', methods=['POST'])
 def check_login():
     users_list = Users.query.all()
     data = request.get_json()
@@ -28,7 +23,9 @@ def check_login():
             return {"ok" :"true"}
     return {"ok" :"false"}
 
-@app.route('/givetags',methods=['GET'])
+
+
+@view.route('/givetags',methods=['GET'])
 def giveTags():
     tag=['math','machine learning','football','italian dishes','tango','web development','react','css','carpenting','english']
     users_with_tag_list = UserTag.query.all()
@@ -37,7 +34,8 @@ def giveTags():
             tag.append(tagger.tag)
     return jsonify(tag)
 
-@app.route('/add_external_links',methods=['POST'])
+
+@view.route('/add_external_links',methods=['POST'])
 def addLinks():
     links_data = request.get_json()
     links_list = ExternalLinks.query.all()
@@ -56,7 +54,7 @@ def addLinks():
     links_list = ExternalLinks.query.all()
     return {"ok":"added"}
 
-@app.route('/filter', methods=['POST'])
+@view.route('/filter', methods=['POST'])
 def filter():
     data = request.get_json()
     tagger = data['tag']
@@ -80,7 +78,7 @@ def filter():
 
     return jsonify(users)
 
-@app.route('/addTag', methods=['POST'])
+@view.route('/addTag', methods=['POST'])
 def add_tags():
 
     data = request.get_json()
@@ -92,7 +90,7 @@ def add_tags():
     db.session.commit()
 
     return "Added tag"
-@app.route('/getUser',methods=['POST'])
+@view.route('/getUser',methods=['POST'])
 def GetUser():
     data = request.get_json();
     mail = data['mail']
@@ -107,7 +105,7 @@ def GetUser():
             'location': user.location, 'age': user.age, 'image': user.image, 'tags': tags, 'mail': user.mail};
 
 
-@app.route('/getMessage', methods=['POST'])
+@view.route('/getMessage', methods=['POST'])
 def get_messages():
     message_data = request.get_json()
     sender=message_data["sender"]
@@ -118,7 +116,7 @@ def get_messages():
         Messages.append({'id':message.id,'mail1':message.mail_user1,'mail2':message.mail_user2,'who':message.sender,'text':message.message})
     return jsonify(Messages)
 
-@app.route('/addMessage', methods=['POST'])
+@view.route('/addMessage', methods=['POST'])
 def add_message():
     message_data = request.get_json()
 
@@ -128,7 +126,7 @@ def add_message():
     db.session.commit()
 
     return "ADDED"
-@app.route('/users', methods=['GET'])
+@view.route('/users', methods=['GET'])
 def profile():
     users_list = Users.query.all()
     users = []
@@ -143,7 +141,7 @@ def profile():
 
     return jsonify(users)
 
-@app.route('/tagsman',methods=['POST'])
+@view.route('/tagsman',methods=['POST'])
 def tags():
     users_list = UserTag.query.all()
     users = []
@@ -155,7 +153,7 @@ def tags():
 
     return jsonify(users)
 
-@app.route('/register', methods=['POST'])
+@view.route('/register', methods=['POST'])
 def add_user():
     user_data = request.get_json()
 

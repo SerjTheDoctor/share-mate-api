@@ -1,6 +1,5 @@
 from flask_script import Manager
-from flask import url_for
-from api.AppStart import app,db
+from AppStart import app,db
 
 #migrate = Migrate(app, db)
 manager = Manager(app)
