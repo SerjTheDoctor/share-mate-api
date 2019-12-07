@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, request , render_template
-from api import db
 from api.Data.models import Users,UserTag,ExternalLinks,Message
-
+from api.Data.models import db
 view = Blueprint('view', __name__)
 
 @view.route('/', methods=['GET'])

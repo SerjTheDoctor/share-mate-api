@@ -1,22 +1,14 @@
 from flask import Flask
+import os
+
 from flask_sqlalchemy import SQLAlchemy
 from config_file import BaseConfig
 from flask_bcrypt import Bcrypt
-from api import create_app
+from flask_cors import CORS
+from api.Data.models import db
 
-app = Flask(__name__)
-app.config.from_object(BaseConfig)
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
-
-
-
-
-@app.route('/home', methods=['GET'])
-def index():
-    return "Hello home!"
-
+from .api import  create_app,app
 if __name__ == '__main__':
-    app = create_app(BaseConfig)
-    app.run(host='127.0.0.1', threaded=True, debug=True)
+    app1 = create_app(app)
+    app1.run(host='127.0.0.1', threaded=True, debug=True)
 
