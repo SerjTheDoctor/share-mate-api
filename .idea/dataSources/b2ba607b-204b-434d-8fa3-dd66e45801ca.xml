@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="database [3]">
+  <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.14">
+    <root id="1">
+      <ServerVersion>3.25.1</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="main">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <collation id="3" parent="1" name="BINARY"/>
+    <collation id="4" parent="1" name="NOCASE"/>
+    <collation id="5" parent="1" name="RTRIM"/>
+    <table id="6" parent="2" name="external_links"/>
+    <table id="7" parent="2" name="message"/>
+    <table id="8" parent="2" name="movie"/>
+    <table id="9" parent="2" name="sqlite_master">
+      <System>1</System>
+    </table>
+    <table id="10" parent="2" name="user_tag"/>
+    <table id="11" parent="2" name="users"/>
+    <column id="12" parent="6" name="mail">
+      <Position>1</Position>
+      <DataType>varchar(40)|0s</DataType>
+    </column>
+    <column id="13" parent="6" name="linkedin">
+      <Position>2</Position>
+      <DataType>varchar(120)|0s</DataType>
+    </column>
+    <column id="14" parent="6" name="github">
+      <Position>3</Position>
+      <DataType>varchar(120)|0s</DataType>
+    </column>
+    <index id="15" parent="6" name="sqlite_autoindex_external_links_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>mail</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="16" parent="6">
+      <ColNames>mail</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_external_links_1</UnderlyingIndexName>
+    </key>
+    <column id="17" parent="7" name="id">
+      <Position>1</Position>
+      <DataType>IDENTITY|0s</DataType>
+    </column>
+    <column id="18" parent="7" name="mail_user1">
+      <Position>2</Position>
+      <DataType>varchar(40)|0s</DataType>
+    </column>
+    <column id="19" parent="7" name="mail_user2">
+      <Position>3</Position>
+      <DataType>varchar(40)|0s</DataType>
+    </column>
+    <column id="20" parent="7" name="sender">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="21" parent="7" name="message">
+      <Position>5</Position>
+      <DataType>varchar(300)|0s</DataType>
+    </column>
+    <index id="22" parent="7" name="sqlite_autoindex_message_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="23" parent="7">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_message_1</UnderlyingIndexName>
+    </key>
+    <column id="24" parent="8" name="id">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="25" parent="8" name="title">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="26" parent="8" name="rating">
+      <Position>3</Position>
+      <DataType>tinyint|0s</DataType>
+    </column>
+    <index id="27" parent="8" name="sqlite_autoindex_movie_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="28" parent="8">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_movie_1</UnderlyingIndexName>
+    </key>
+    <column id="29" parent="9" name="type">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="30" parent="9" name="name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="31" parent="9" name="tbl_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="32" parent="9" name="rootpage">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="33" parent="9" name="sql">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="34" parent="10" name="mail">
+      <Position>1</Position>
+      <DataType>varchar(40)|0s</DataType>
+    </column>
+    <column id="35" parent="10" name="tag">
+      <Position>2</Position>
+      <DataType>varchar(20)|0s</DataType>
+    </column>
+    <column id="36" parent="10" name="rating">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="37" parent="10" name="sqlite_autoindex_user_tag_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>mail
+tag</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="38" parent="10">
+      <ColNames>mail
+tag</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_user_tag_1</UnderlyingIndexName>
+    </key>
+    <column id="39" parent="11" name="mail">
+      <Position>1</Position>
+      <DataType>nvarchar(40)|0s</DataType>
+    </column>
+    <column id="40" parent="11" name="first_name">
+      <Position>2</Position>
+      <DataType>nvarchar(45)|0s</DataType>
+    </column>
+    <column id="41" parent="11" name="last_name">
+      <Position>3</Position>
+      <DataType>nvarchar(45)|0s</DataType>
+    </column>
+    <column id="42" parent="11" name="shareCoins">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="43" parent="11" name="password">
+      <Position>5</Position>
+      <DataType>nvarchar(40)|0s</DataType>
+    </column>
+    <column id="44" parent="11" name="phone_number">
+      <Position>6</Position>
+      <DataType>varchar(15)|0s</DataType>
+    </column>
+    <column id="45" parent="11" name="age">
+      <Position>7</Position>
+      <DataType>tinyiny|0s</DataType>
+    </column>
+    <column id="46" parent="11" name="location">
+      <Position>8</Position>
+      <DataType>nvarchar(50)|0s</DataType>
+    </column>
+    <column id="47" parent="11" name="image">
+      <Position>9</Position>
+      <DataType>nvarchar(300)|0s</DataType>
+    </column>
+    <index id="48" parent="11" name="sqlite_autoindex_users_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>mail</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="49" parent="11">
+      <ColNames>mail</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_users_1</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>

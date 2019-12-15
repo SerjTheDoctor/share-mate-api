@@ -14,8 +14,8 @@ def create_app():
     bcrypt = Bcrypt(app)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Data/database.db'
-
-    db.init_app(app)
+    with app.app_context():
+        db.init_app(app)
 
     from api.Views.views import view
     app.register_blueprint(view)
