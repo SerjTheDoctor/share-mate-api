@@ -3,13 +3,16 @@ from api.Data.models import Users,UserTag,ExternalLinks,Message
 from api.Data.models import db
 view = Blueprint('view', __name__)
 
+
 @view.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@view.route('/page<path:page>', methods=['GET'])
-def any_root_path(page):
-    return render_template('page.html')
+
+@view.route('/<path:path>', methods=['GET'])
+def any_root_path(path):
+    return render_template('index.html')
+
 
 @view.route('/login', methods=['POST'])
 def check_login():

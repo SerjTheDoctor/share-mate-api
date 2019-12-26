@@ -7,7 +7,7 @@ import os
 
 
 def create_app():
-    app = Flask(__name__, static_folder='/static')
+    app = Flask(__name__, static_folder='./static', template_folder='./static/public')
     static_folder_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "client")
     app.config.from_object(BaseConfig)
     bcrypt = Bcrypt(app)
